@@ -1,0 +1,273 @@
+openapi: 3.0.0
+info:
+  title: segmentacao
+  version: '1.0'
+  description: Api para segmentação de conteudos
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /published-cms:
+    post:
+      summary: Novo conteúdo para monitoramento
+      tags: []
+      responses: {}
+      operationId: post-contentcms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: |-
+          {
+            "event": "entry.create",
+            "created_at": "2020-01-10T08:47:36.649Z",
+            "model": "conseg-campaings",
+            "entry": {
+              "id": 1,
+              "geolocation": {},
+              "city": "Brasilia",
+              "postal_code": null,
+              "category": null,
+              "full_name": "Paris",
+              "created_at": "2020-01-10T08:47:36.264Z",
+              "updated_at": "2020-01-10T08:47:36.264Z",
+              "cover": null,
+              "images": []
+            }
+          }
+      description: Informações sobre um novo conteudo recebido de um cms
+    get:
+      summary: Conteúdos publicados e prontos para adicionar segmentação
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/content'
+      operationId: get-contentcms
+      description: Obtem conteúdos recebidos de um cms
+    put:
+      summary: Atualiza informações dos conteudos gerenciados
+      tags: []
+      responses: {}
+      operationId: put-content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: |-
+          {
+            "event": "entry.create",
+            "created_at": "2020-01-10T08:47:36.649Z",
+            "model": "conseg-campaings",
+            "entry": {
+              "id": 1,
+              "postal_code": null,
+              "category": null,
+              "full_name": "Paris",
+              "created_at": "2020-01-10T08:47:36.264Z",
+              "updated_at": "2020-01-10T08:47:36.264Z",
+              "cover": null,
+              "images": []
+            }
+          }
+    delete:
+      summary: Exclui um conteúdo
+      tags: []
+      responses: {}
+      operationId: delete-content
+    parameters: []
+  /mapping:
+    post:
+      summary: Define o publico alvo de um conteúdo
+      tags: []
+      responses: {}
+      operationId: post-mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ''
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/map'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/map'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/map'
+        description: Informacoes mapeando o conteudo a um publico alvo
+      description: Mapea uma novo publico alvo para o conteudo
+    get:
+      summary: Mapear o publico para cada conteúdo publicado
+      tags: []
+      operationId: get-mapping
+      responses: {}
+    put:
+      summary: Atualiza o publico alvo de um conteudo
+      tags: []
+      responses: {}
+      operationId: put-mapping
+  /user-info:
+    post:
+      summary: Informações de usuário que o tornam elegível a um conteúdo
+      tags: []
+      responses: {}
+      operationId: post-user-info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user-info'
+        description: ''
+  /contents:
+    get:
+      summary: Obtem as sugestões de conteúdos para os usuários
+      tags: []
+      responses: {}
+      operationId: get-contents
+components:
+  schemas:
+    map:
+      title: map
+      type: object
+      description: mapeamento do conteudo para segmentação
+      x-examples:
+        Conteudo-1 para cashback > 500:
+          id: 1
+          contentId: '1'
+          audiences:
+            - id: 1
+              type: cashback
+              operator: gte
+              value: '500'
+      properties:
+        id:
+          type: number
+        contentId:
+          type: string
+          description: Identificação do conteudo no cms
+        audiences:
+          type: array
+          items:
+            $ref: '#/components/schemas/audiencespec'
+    content-from-cms:
+      title: content
+      type: object
+      x-examples:
+        NovaCampanha:
+          event: entry.create
+          created_at: '2020-01-10T08:47:36.649Z'
+          model: conseg-campaings
+          entry:
+            id: 1
+            title: campanha de natal fenae mundo caixa
+            subtitle: resumo da cmapnhaa
+            texto: texto da campanha
+            start: '2020-01-10T08:47:36.264Z'
+            created_at: '2020-01-10T08:47:36.264Z'
+            updated_at: '2020-01-10T08:47:36.264Z'
+            cover: null
+            media: []
+      description: Conteudo que deverá ser mapeado. Esse modelo é usado preferencialmente pelo webhook do strapicms (ou qualquer outro gerenciador de conteúdo da wiz).
+      properties:
+        event:
+          type: string
+        created_at:
+          type: string
+        model:
+          type: string
+        entry:
+          type:
+            - string
+            - object
+          properties:
+            id:
+              type: string
+            cmsObject:
+              type:
+                - string
+                - object
+    published-content:
+      title: content
+      type: object
+      description: 'Conteúdo '
+      properties:
+        id:
+          type: number
+          description: Identificação do conteudo na base de dados da api de segmentação
+        cmsId:
+          type: string
+          description: Id no cms de origem
+        model:
+          type: string
+          description: Identificação do modelo do cms de origem
+        mapped:
+          type: boolean
+          description: Conteudo já teve seu publico alvo identificado
+        source:
+          type: string
+      x-examples:
+        example-1:
+          id: 1
+          cmsId: '10'
+          model: conseg-campaing
+          mapped: false
+          source: strapi-cms
+    audience-spec:
+      title: audiencespec
+      type: object
+      x-examples:
+        Cashback > 200:
+          id: 1
+          type: cashback
+          operator: gte
+          value: '200'
+      properties:
+        id:
+          type: number
+        type:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+      description: Especificação do publico alvo
+    user-info:
+      title: user-info
+      type: object
+      properties:
+        id:
+          type: string
+        field:
+          type: string
+        value:
+          type: string
+      x-examples:
+        catalogo:
+          id: '70638373115'
+          field: catalogo
+          value: '100'
+        cashback:
+          id: '70638373115'
+          field: cashback
+          value: '500'
+        genero:
+          id: '70638373115'
+          field: genero
+          value: m
+        cargo:
+          id: '70638373115'
+          field: cargo
+          value: analista sistemas
+      description: Essas informações de um usuário o tornará elegivel a uma campanha. Esse modelo poderia ser usado por algum webhook das apis de cashback e ltm. Também pode ser acessado quando o usuário fizer um primeiro acesso
