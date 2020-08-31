@@ -162,7 +162,7 @@ components:
           items:
             $ref: '#/components/schemas/audiencespec'
     content-from-cms:
-      title: content
+      title: content-from-cms
       type: object
       x-examples:
         NovaCampanha:
@@ -183,29 +183,42 @@ components:
       properties:
         event:
           type: string
+          description: Evento disparado pelo cms
         created_at:
           type: string
+          description: data de criação do conteúdo
         model:
           type: string
+          description: 'modelo de origem do conteúdo. ex.: conseg-campaings; skautomotive-game'
         entry:
           type:
             - string
             - object
+          description: conteudo criado
           properties:
             id:
               type: string
+              description: id do conteudo criado no cms
             cmsObject:
               type:
                 - string
                 - object
+              description: informações gerais do conteúdo
     published-content:
       title: content
       type: object
-      description: 'Conteúdo '
+      description: '''Conteúdo '
+      x-examples:
+        example-1:
+          id: 1
+          cmsId: '10'
+          model: conseg-campaing
+          mapped: false
+          source: strapi-cms
       properties:
         id:
           type: number
-          description: Identificação do conteudo na base de dados da api de segmentação
+          description: '''Identificação do conteudo na base de dados da api de segmentação'
         cmsId:
           type: string
           description: Id no cms de origem
@@ -217,13 +230,6 @@ components:
           description: Conteudo já teve seu publico alvo identificado
         source:
           type: string
-      x-examples:
-        example-1:
-          id: 1
-          cmsId: '10'
-          model: conseg-campaing
-          mapped: false
-          source: strapi-cms
     audience-spec:
       title: audiencespec
       type: object
