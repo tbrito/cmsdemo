@@ -86,7 +86,7 @@ paths:
       responses: {}
       operationId: delete-content
     parameters: []
-  /mapping:
+  /interested:
     post:
       summary: Define o publico alvo de um conteúdo
       tags: []
