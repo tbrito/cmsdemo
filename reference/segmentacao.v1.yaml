@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: segmentacao
   version: '1.0'
-  description: Api para segmentação de conteudos
+  description: Api para segmentação de conteúdos
 servers:
   - url: 'http://localhost:3000'
 paths:
@@ -91,7 +91,7 @@ paths:
       summary: Define o publico alvo de um conteúdo
       tags: []
       responses: {}
-      operationId: post-mapping
+      operationId: post-interested
       requestBody:
         content:
           application/json:
@@ -99,25 +99,25 @@ paths:
               $ref: ''
           application/xml:
             schema:
-              $ref: '#/components/schemas/map'
+              $ref: '#/components/schemas/interested'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/map'
+              $ref: '#/components/schemas/interested'
           text/html:
             schema:
-              $ref: '#/components/schemas/map'
-        description: Informacoes mapeando o conteudo a um publico alvo
-      description: Mapea uma novo publico alvo para o conteudo
+              $ref: '#/components/schemas/interested'
+        description: Informações interestedeando o conteúdo a um publico alvo
+      description: interestedea uma novo público alvo para o conteúdo
     get:
-      summary: Mapear o publico para cada conteúdo publicado
+      summary: interestedear o público para cada conteúdo publicado
       tags: []
-      operationId: get-mapping
+      operationId: get-interested
       responses: {}
     put:
       summary: Atualiza o publico alvo de um conteudo
       tags: []
       responses: {}
-      operationId: put-mapping
+      operationId: put-interested
   /user-info:
     post:
       summary: Informações de usuário que o tornam elegível a um conteúdo
@@ -138,14 +138,14 @@ paths:
       operationId: get-contents
 components:
   schemas:
-    map:
-      title: map
+    interested:
+      title: interested
       type: object
-      description: mapeamento do conteudo para segmentação
+      description: Interessado no conteúdo para segmentação
       x-examples:
         Conteudo-1 para cashback > 500:
           id: 1
-          contentId: '1'
+          cmsId: '1'
           audiences:
             - id: 1
               type: cashback
@@ -154,7 +154,7 @@ components:
       properties:
         id:
           type: number
-        contentId:
+        cmsId:
           type: string
           description: Identificação do conteudo no cms
         audiences:
@@ -172,14 +172,14 @@ components:
           entry:
             id: 1
             title: campanha de natal fenae mundo caixa
-            subtitle: resumo da cmapnhaa
+            subtitle: resumo da cinterestednhaa
             texto: texto da campanha
             start: '2020-01-10T08:47:36.264Z'
             created_at: '2020-01-10T08:47:36.264Z'
             updated_at: '2020-01-10T08:47:36.264Z'
             cover: null
             media: []
-      description: Conteudo que deverá ser mapeado. Esse modelo é usado preferencialmente pelo webhook do strapicms (ou qualquer outro gerenciador de conteúdo da wiz).
+      description: Conteudo que deverá ser interestedeado. Esse modelo é usado preferencialmente pelo webhook do strapicms (ou qualquer outro gerenciador de conteúdo da wiz).
       properties:
         event:
           type: string
@@ -213,7 +213,7 @@ components:
           id: 1
           cmsId: '10'
           model: conseg-campaing
-          mapped: false
+          interestedped: false
           source: strapi-cms
       properties:
         id:
@@ -225,7 +225,7 @@ components:
         model:
           type: string
           description: Identificação do modelo do cms de origem
-        mapped:
+        interested:
           type: boolean
           description: Conteudo já teve seu publico alvo identificado
         source:
