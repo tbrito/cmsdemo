@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable, Subscriber } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class BannerService {
         var banner: any;
 
         this.http
-            .post<any>(`${environment.apiCms}/auth/local`, 
+            .post<any>(`${environment.api_url}/auth/local`, 
                 { identifier: "beneficioscms@wizsolucoes.com.br", password: "Q1w2e3r4" },
                 { headers: headers } )
             .subscribe(resp =>
@@ -30,7 +30,7 @@ export class BannerService {
                     .set('x-api-key', resp.jwt);
         
                 banner = this.http.get<any>(
-                    `${environment.apiCms}/beneficios/banners/${id}`, 
+                    `${environment.api_url}/beneficios/banners/${id}`, 
                      { headers: headers });
                 
                 banner.subscribe(ret => {

@@ -1,0 +1,17 @@
+<div class="product-meta">
+  <a [routerLink]="['/profile', product.author.username]">
+    <img [src]="product.author.image" />
+  </a>
+
+  <div class="info">
+    <a class="author"
+      [routerLink]="['/profile', product.author.username]">
+      {{ product.author.username }}
+    </a>
+    <span class="date">
+      {{ product.createdAt | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>

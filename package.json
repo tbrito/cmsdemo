@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~10.0.9",
     "@angular/router": "~10.0.9",
     "angular-jwt": "^0.1.11",
+    "angular-marked": "^1.2.2",
+    "market": "^1.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

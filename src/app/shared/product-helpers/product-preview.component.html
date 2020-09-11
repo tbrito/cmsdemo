@@ -1,0 +1,22 @@
+<div class="product-preview">
+  <app-product-meta [product]="product">
+    <app-favorite-button
+      [product]="product"
+      (toggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+      {{product.favoritesCount}}
+    </app-favorite-button>
+  </app-product-meta>
+
+  <a [routerLink]="['/product', product.id]" class="preview-link">
+    <h1>{{ product.title }}</h1>
+    <p>{{ product.description }}</p>
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of product.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>

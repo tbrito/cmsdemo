@@ -1,25 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { BannerService } from './services/banner.service';
-import { Observable, Subscriber } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+
+import { UserService } from './core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
-
-export class AppComponent implements OnInit  {
-  
-  title = 'demo';
-  private subscription: Subscription;
-  public bannerRet: any;
-  
-  constructor(private bannerService: BannerService) {}
+export class AppComponent implements OnInit {
+  constructor (
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
-    var ret = this.bannerService.getById(2);
-
-    console.log(this.bannerService.banners);
+    this.userService.populate();
   }
 }
