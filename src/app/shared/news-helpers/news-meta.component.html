@@ -1,0 +1,17 @@
+<div class="news-meta">
+  <a [routerLink]="['/profile', news.created_by.firstname]">
+    <img [src]="news.media[0].url" width="50px" height="50px"/>
+  </a>
+
+  <div class="info">
+    <a class="author"
+      [routerLink]="['/profile', news.created_by.firstname]">
+      {{ news.created_by.firstname }}
+    </a>
+    <span class="date">
+      {{ news.created_at | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>

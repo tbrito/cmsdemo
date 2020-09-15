@@ -1,0 +1,17 @@
+<div class="banner-meta" *ngif="banner.created_by != null">
+  <a [routerLink]="['/profile', banner.created_by.firstname]">
+    <img [src]="banner.media[0].url" width="50px" height="50px"/>
+  </a> -->
+
+  <div class="info">
+    <a class="author"
+      [routerLink]="['/profile', banner.created_by.firstname]">
+      {{ banner.created_by.firstname }}
+    </a>
+    <span class="date">
+      {{ banner.created_at | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>

@@ -30,23 +30,23 @@ export class HomeComponent implements OnInit {
 
         // set the product list accordingly
         if (authenticated) {
-          this.setListTo('feed');
+          this.setListTo('product');
         } else {
           this.setListTo('all');
         }
       }
     );
 
-    this.tagsService.getAll()
-    .subscribe(tags => {
-      this.tags = tags;
-      this.tagsLoaded = true;
-    });
+    // // this.tagsService.getAll()
+    // // .subscribe(tags => {
+    // //   this.tags = tags;
+    // //   this.tagsLoaded = true;
+    // // });
   }
 
   setListTo(type: string = '', filters: Object = {}) {
     // If feed is requested but user is not authenticated, redirect to login
-    if (type === 'feed' && !this.isAuthenticated) {
+    if (type === 'product' && !this.isAuthenticated) {
       this.router.navigateByUrl('/login');
       return;
     }

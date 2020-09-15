@@ -1,20 +1,22 @@
 import { Component, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { BannersService } from '../../core';
+import { BannerListConfig } from '../../core/models/banner-list-config.model';
+import { Banner } from '../../core/models/banner.model';
 
-import { Product, ProductListConfig as ProductListConfig, ProductsService } from '../../core';
 @Component({
-  selector: 'app-product-list',
-  styleUrls: ['product-list.component.css'],
-  templateUrl: './product-list.component.html'
+  selector: 'app-banner-list',
+  styleUrls: ['banner-list.component.css'],
+  templateUrl: './banner-list.component.html'
 })
-export class ProductListComponent {
+export class BannerListComponent {
   constructor (
-    private productsService: ProductsService
+    private bannersService: BannersService
   ) {}
 
   @Input() limit: number;
   @Input()
-  set config(config: ProductListConfig) {
+  set config(config: BannerListConfig) {
     if (config) {
       this.query = config;
       this.currentPage = 1;
@@ -22,8 +24,8 @@ export class ProductListComponent {
     }
   }
 
-  query: ProductListConfig;
-  results: Product[];
+  query: BannerListConfig;
+  results: Banner[];
   loading = false;
   currentPage = 1;
   totalPages: Array<number> = [1];
@@ -43,13 +45,13 @@ export class ProductListComponent {
     //   this.query.filters.offset =  (this.limit * (this.currentPage - 1));
     // }
 
-    this.productsService.query(this.query)
+    this.bannersService.query(this.query)
     .subscribe(data => {
       this.loading = false;
-     
+      console.log(data);
       this.results = data;
       this.results.forEach(x => x.media.forEach(i => i.url = environment.url_images + '/' + i.url));
-      
+
       // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
       this.totalPages = Array.from(new Array(Math.ceil(data.length / this.limit)), (val, index) => index + 1);
     });

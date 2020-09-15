@@ -10,6 +10,8 @@ import {
   JwtService,
   ProfilesService,
   TagsService,
+  NewsService,
+  BannersService,
   UserService
 } from './services';
 
@@ -25,6 +27,8 @@ import {
     JwtService,
     ProfilesService,
     TagsService,
+    NewsService, 
+    BannersService,
     UserService
   ],
   declarations: []

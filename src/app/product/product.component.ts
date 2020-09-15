@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 import {
   Product,
@@ -29,9 +30,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(
-      (data: { product: Product }) => {
+      (data) => {
         this.product = data.product;
-
+        this.product.media.forEach(i => i.url = environment.url_images + '/' + i.url);
       }
     );
 
@@ -46,7 +47,7 @@ export class ProductComponent implements OnInit {
   }
 
   onToggleFavorite(favorited: boolean) {
-    this.product.favorites = favorited;
+    this.product.corporativo = favorited;
   }
 
   onToggleFollowing(following: boolean) {

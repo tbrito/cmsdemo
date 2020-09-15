@@ -1,0 +1,29 @@
+<app-banner-preview
+  *ngFor="let banner of results"
+  [banner]="banner">
+</app-banner-preview>
+
+<div class="app-banner-preview"
+  [hidden]="!loading">
+  Loading bannerss...
+</div>
+
+<div class="app-banner-preview"
+  [hidden]="loading || results.length">
+  No bannerss are here... yet.
+</div>
+
+<nav [hidden]="loading || totalPages.length <= 1">
+  <ul class="pagination">
+
+    <li class="page-item"
+      [ngClass]="{'active': pageNumber === currentPage}"
+      *ngFor="let pageNumber of totalPages"
+      (click)="setPageTo(pageNumber)">
+
+      <a class="page-link" >{{ pageNumber }}</a>
+
+    </li>
+
+  </ul>
+</nav>

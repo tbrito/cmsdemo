@@ -1,4 +1,4 @@
-export interface ProductListConfig {
+export interface BannerListConfig {
   type: string;
 
   filters: {

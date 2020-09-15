@@ -32,27 +32,27 @@ export class FavoriteButtonComponent {
         }
 
         // Favorite the product if it isn't favorited yet
-        if (!this.product.favorited) {
-          return this.productsService.favorite(this.product.id)
-          .pipe(tap(
-            data => {
-              this.isSubmitting = false;
-              this.toggle.emit(true);
-            },
-            err => this.isSubmitting = false
-          ));
+        // if (!this.product.favorited) {
+        //   return this.productsService.favorite(this.product.id)
+        //   .pipe(tap(
+        //     data => {
+        //       this.isSubmitting = false;
+        //       this.toggle.emit(true);
+        //     },
+        //     err => this.isSubmitting = false
+        //   ));
 
-        // Otherwise, unfavorite the product
-        } else {
-          return this.productsService.unfavorite(this.product.id)
-          .pipe(tap(
-            data => {
-              this.isSubmitting = false;
-              this.toggle.emit(false);
-            },
-            err => this.isSubmitting = false
-          ));
-        }
+        // // Otherwise, unfavorite the product
+        // } else {
+        //   return this.productsService.unfavorite(this.product.id)
+        //   .pipe(tap(
+        //     data => {
+        //       this.isSubmitting = false;
+        //       this.toggle.emit(false);
+        //     },
+        //     err => this.isSubmitting = false
+        //   ));
+        // }
 
       }
     )).subscribe();

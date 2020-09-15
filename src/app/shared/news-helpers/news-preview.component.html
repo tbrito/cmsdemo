@@ -1,0 +1,22 @@
+<div class="news-preview">
+  <app-news-meta [news]="news">
+    <app-favorite-button
+      [news]="news"
+      (toggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+      {{news.favoritesCount}}
+    </app-favorite-button>
+  </app-news-meta>
+
+  <a [routerLink]="['/news', news.id]" class="preview-link">
+    <h1>{{ news.title }}</h1>
+    <p>{{ news.description }}</p>
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of news.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>

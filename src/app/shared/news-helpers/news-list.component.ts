@@ -1,20 +1,22 @@
 import { Component, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-import { Product, ProductListConfig as ProductListConfig, ProductsService } from '../../core';
+import { News, NewsListConfig as NewsListConfig, ProductsService } from '../../core';
+import { NewsService } from '../../core/services/news.service';
+
 @Component({
-  selector: 'app-product-list',
-  styleUrls: ['product-list.component.css'],
-  templateUrl: './product-list.component.html'
+  selector: 'app-news-list',
+  styleUrls: ['news-list.component.css'],
+  templateUrl: './news-list.component.html'
 })
-export class ProductListComponent {
+export class NewsListComponent {
   constructor (
-    private productsService: ProductsService
+    private newsService: NewsService
   ) {}
 
   @Input() limit: number;
   @Input()
-  set config(config: ProductListConfig) {
+  set config(config: NewsListConfig) {
     if (config) {
       this.query = config;
       this.currentPage = 1;
@@ -22,8 +24,8 @@ export class ProductListComponent {
     }
   }
 
-  query: ProductListConfig;
-  results: Product[];
+  query: NewsListConfig;
+  results: News[];
   loading = false;
   currentPage = 1;
   totalPages: Array<number> = [1];
@@ -43,13 +45,13 @@ export class ProductListComponent {
     //   this.query.filters.offset =  (this.limit * (this.currentPage - 1));
     // }
 
-    this.productsService.query(this.query)
+    this.newsService.query(this.query)
     .subscribe(data => {
       this.loading = false;
-     
+      
       this.results = data;
       this.results.forEach(x => x.media.forEach(i => i.url = environment.url_images + '/' + i.url));
-      
+
       // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
       this.totalPages = Array.from(new Array(Math.ceil(data.length / this.limit)), (val, index) => index + 1);
     });

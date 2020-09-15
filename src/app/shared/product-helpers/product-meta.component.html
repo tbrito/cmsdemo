@@ -1,15 +1,15 @@
 <div class="product-meta">
-  <a [routerLink]="['/profile', product.author.username]">
-    <img [src]="product.author.image" />
+  <a [routerLink]="['/profile', product.created_by.firstname]">
+    <img [src]="product.media[0].url" />
   </a>
 
   <div class="info">
     <a class="author"
-      [routerLink]="['/profile', product.author.username]">
-      {{ product.author.username }}
+      [routerLink]="['/profile', product.created_by.firstname]">
+      {{ product.created_by.firstname }}
     </a>
     <span class="date">
-      {{ product.createdAt | date: 'longDate' }}
+      {{ product.created_at | date: 'longDate' }}
     </span>
   </div>
 

@@ -15,8 +15,7 @@ export class ApiService {
   ) {
     this.headers = new HttpHeaders();
     this.headers = this.headers.set('x-api-subscription', environment.apiSubscription);
-    this.headers = this.headers.set('Access-Control-Allow-Origin', '*');
-    this.headers = this.headers.append('Access-Control-Allow-Credentials', 'true');
+    this.headers = this.headers.set('x-api-key', environment.apiKey);
     console.log(this.headers);
   }
 

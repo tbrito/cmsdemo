@@ -8,6 +8,10 @@ import { ProductListComponent, ProductMetaComponent, ProductPreviewComponent } f
 import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
+import { NewsListComponent } from './news-helpers/news-list.component';
+import { NewsMetaComponent } from './news-helpers/news-meta.component';
+import { NewsPreviewComponent } from './news-helpers';
+import { BannerListComponent, BannerMetaComponent, BannerPreviewComponent } from './banners-helpers';
 
 @NgModule({
   imports: [
@@ -21,6 +25,12 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ProductListComponent,
     ProductMetaComponent,
     ProductPreviewComponent,
+    NewsListComponent,
+    NewsMetaComponent,
+    NewsPreviewComponent,
+    BannerListComponent,
+    BannerMetaComponent,
+    BannerPreviewComponent,
     FavoriteButtonComponent,
     FollowButtonComponent,
     ListErrorsComponent,
@@ -30,6 +40,12 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ProductListComponent,
     ProductMetaComponent,
     ProductPreviewComponent,
+    NewsListComponent,
+    NewsMetaComponent,
+    NewsPreviewComponent,
+    BannerListComponent,
+    BannerMetaComponent,
+    BannerPreviewComponent,
     CommonModule,
     FavoriteButtonComponent,
     FollowButtonComponent,

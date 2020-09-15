@@ -15,16 +15,23 @@
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
               <a class="nav-link"
-                 [ngClass]="{'active': listConfig.type === 'feed'}"
-                 (click)="setListTo('feed')">
-                 Feeds
+                 [ngClass]="{'active': listConfig.type === 'product'}"
+                 (click)="setListTo('product')">
+                 Produtos
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link"
                  [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.id}"
-                 (click)="setListTo('all')">
-                 Global Feed
+                 (click)="setListTo('news')">
+                 Notícias
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.id}"
+                 (click)="setListTo('banners')">
+                 Banners
               </a>
             </li>
             <li class="nav-item" [hidden]="!listConfig.filters.id">
@@ -36,6 +43,8 @@
         </div>
 
         <app-product-list [limit]="10" [config]="listConfig"></app-product-list>
+        <app-news-list [limit]="10" [config]="listConfig"></app-news-list>
+        <app-banner-list [limit]="10" [config]="listConfig"></app-banner-list>
       </div>
     </div>
   </div>

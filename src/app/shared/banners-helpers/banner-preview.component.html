@@ -1,0 +1,21 @@
+<div class="banner-preview">
+  <app-banner-meta [banner]="banner">
+    <app-favorite-button
+      [banner]="banner"
+      (toggle)="onToggleFavorite($event)"
+      class="pull-xs-right">
+    </app-favorite-button>
+  </app-banner-meta>
+
+  <a [routerLink]="['/banner', banner.id]" class="preview-link">
+    <h1>{{ banner.title }}</h1>
+    <p>{{ banner.description }}</p>
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of banner.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>

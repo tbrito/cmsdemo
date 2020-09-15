@@ -13,7 +13,7 @@ export class ProductsService {
     private apiService: ApiService
   ) {}
 
-  query(config: ProductListConfig): Observable<{products: Product[], productsCount: number}> {
+  query(config: ProductListConfig): Observable<Product[]> {
     // Convert any filters over to Angular's URLSearchParams
     const params = {};
 
@@ -29,25 +29,25 @@ export class ProductsService {
     );
   }
 
-  get(slug): Observable<Product> {
-    return this.apiService.get('/beneficios/products/' + slug)
-      .pipe(map(data => data.product));
+  get(id): Observable<Product> {
+    return this.apiService.get('/beneficios/products/' + id)
+      .pipe(map(data => data as Product));
   }
 
-  destroy(slug) {
-    return this.apiService.delete('/beneficios/products/' + slug);
+  destroy(id) {
+    return this.apiService.delete('/beneficios/products/' + id);
   }
 
   save(product): Observable<Product> {
     // If we're updating an existing product
     if (product.slug) {
       return this.apiService.put('/beneficios/products/' + product.slug, {product: product})
-        .pipe(map(data => data.product));
+        .pipe(map(data => data as Product));
 
     // Otherwise, create a new product
     } else {
       return this.apiService.post('/beneficios/products/', {product: product})
-        .pipe(map(data => data.product));
+        .pipe(map(data => data as Product));
     }
   }
 

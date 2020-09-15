@@ -1,4 +1,4 @@
-export interface ProductListConfig {
+export interface NewsListConfig {
   type: string;
 
   filters: {

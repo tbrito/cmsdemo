@@ -10,12 +10,12 @@ export class ProductPreviewComponent {
   @Input() product: Product;
 
   onToggleFavorite(favorited: boolean) {
-    this.product['favorited'] = favorited;
+    // this.product['favorited'] = favorited;
 
-    if (favorited) {
-      this.product['favoritesCount']++;
-    } else {
-      this.product['favoritesCount']--;
-    }
+    // if (favorited) {
+    //   this.product['favoritesCount']++;
+    // } else {
+    //   this.product['favoritesCount']--;
+    // }
   }
 }
