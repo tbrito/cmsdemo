@@ -131,11 +131,27 @@ paths:
               $ref: '#/components/schemas/user-info'
         description: ''
   /contents:
-    get:
+      operationId: get-contents
+    post:
       summary: Obtem as sugestões de conteúdos para os usuários
       tags: []
       responses: {}
-      operationId: get-contents
+      operationId: post-contentcms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: |-
+          {
+            "cpf": "99999999999"
+          }
+      description: Informações sobre um novo conteudo recebido de um cms
 components:
   schemas:
     interested:
