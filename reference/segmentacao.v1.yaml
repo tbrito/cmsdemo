@@ -86,12 +86,12 @@ paths:
       responses: {}
       operationId: delete-content
     parameters: []
-  /interested:
+  /audiences:
     post:
       summary: Define o publico alvo de um conteúdo
       tags: []
       responses: {}
-      operationId: post-interested
+      operationId: post-audiences
       requestBody:
         content:
           application/json:
@@ -99,44 +99,32 @@ paths:
               $ref: ''
           application/xml:
             schema:
-              $ref: '#/components/schemas/interested'
+              $ref: '#/components/schemas/audiences'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/interested'
+              $ref: '#/components/schemas/audiences'
           text/html:
             schema:
-              $ref: '#/components/schemas/interested'
-        description: Informações interestedeando o conteúdo a um publico alvo
-      description: interestedea uma novo público alvo para o conteúdo
+              $ref: '#/components/schemas/audiences'
+        description: Informações interessadoeando o conteúdo a um publico alvo
+      description: interessa uma novo público alvo para o conteúdo
     get:
-      summary: interestedear o público para cada conteúdo publicado
+      summary: audiencesear o público para cada conteúdo publicado
       tags: []
-      operationId: get-interested
+      operationId: get-audiences
       responses: {}
     put:
       summary: Atualiza o publico alvo de um conteudo
       tags: []
       responses: {}
-      operationId: put-interested
-  /user-info:
-    post:
-      summary: Informações de usuário que o tornam elegível a um conteúdo
-      tags: []
-      responses: {}
-      operationId: post-user-info
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user-info'
-        description: ''
+      operationId: put-audiences
   /contents:
       operationId: get-contents
-    post:
-      summary: Obtem as sugestões de conteúdos para os usuários
+    get:
+      summary: Obtem os conteudos de interesse de um usuário
       tags: []
       responses: {}
-      operationId: post-contentcms
+      operationId: get-contentcms
       requestBody:
         content:
           application/json:
@@ -154,8 +142,8 @@ paths:
       description: Informações sobre um novo conteudo recebido de um cms
 components:
   schemas:
-    interested:
-      title: interested
+    audiences:
+      title: audiences
       type: object
       description: Interessado no conteúdo para segmentação
       x-examples:
@@ -188,14 +176,14 @@ components:
           entry:
             id: 1
             title: campanha de natal fenae mundo caixa
-            subtitle: resumo da cinterestednhaa
+            subtitle: resumo da caudiencesnhaa
             texto: texto da campanha
             start: '2020-01-10T08:47:36.264Z'
             created_at: '2020-01-10T08:47:36.264Z'
             updated_at: '2020-01-10T08:47:36.264Z'
             cover: null
             media: []
-      description: Conteudo que deverá ser interestedeado. Esse modelo é usado preferencialmente pelo webhook do strapicms (ou qualquer outro gerenciador de conteúdo da wiz).
+      description: Conteudo que deverá ser audienceseado. Esse modelo é usado preferencialmente pelo webhook do strapicms (ou qualquer outro gerenciador de conteúdo da wiz).
       properties:
         event:
           type: string
@@ -229,7 +217,7 @@ components:
           id: 1
           cmsId: '10'
           model: conseg-campaing
-          interestedped: false
+          audiencesped: false
           source: strapi-cms
       properties:
         id:
@@ -241,13 +229,14 @@ components:
         model:
           type: string
           description: Identificação do modelo do cms de origem
-        interested:
+        audiences:
           type: boolean
           description: Conteudo já teve seu publico alvo identificado
         source:
           type: string
-    audience-spec:
-      title: audiencespec
+    target:
+      title: Publico alvo de um conteúdo
+      description: Especifica o publico alvo de um conteúdo
       type: object
       x-examples:
         Cashback > 200:
@@ -258,38 +247,14 @@ components:
       properties:
         id:
           type: number
+          description: Identificação do publico alvo
         type:
           type: string
+          description: grupo do publico alvo
         operator:
           type: string
+          description: Operador de comparação para separação de conteúdos
         value:
           type: string
-      description: Especificação do publico alvo
-    user-info:
-      title: user-info
-      type: object
-      properties:
-        id:
-          type: string
-        field:
-          type: string
-        value:
-          type: string
-      x-examples:
-        catalogo:
-          id: '70638373115'
-          field: catalogo
-          value: '100'
-        cashback:
-          id: '70638373115'
-          field: cashback
-          value: '500'
-        genero:
-          id: '70638373115'
-          field: genero
-          value: m
-        cargo:
-          id: '70638373115'
-          field: cargo
-          value: analista sistemas
-      description: Essas informações de um usuário o tornará elegivel a uma campanha. Esse modelo poderia ser usado por algum webhook das apis de cashback e ltm. Também pode ser acessado quando o usuário fizer um primeiro acesso
+          description: Valor que define o agrupamento do publico alvo. ex. pessoas com cashback > (value) 500
+      
